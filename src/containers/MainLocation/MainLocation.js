@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './MainLocation.css';
 import LocationSearch from '../../components/LocationSearch/LocationSearch';
 // import Darksky from 'darkskyjs';
 
-const mainLocalization = props => {
+
+const MainLocation = (props) => {
+
+    const [locationText, setLocationText] = useState("");
+
+    const locationTextChangeHandler = (ev) => {
+        setLocationText(ev.target.value);
+    }
+
     return (
         <div className="main-location">
             <h1>Twoje miasto</h1>
-            <LocationSearch />
+            <LocationSearch 
+                valueChanged={locationTextChangeHandler}
+                value={locationText}
+            />
         </div>
     );
 };
 
-mainLocalization.propTypes = {
+MainLocation.propTypes = {
 
 };
 
-export default mainLocalization;
+export default MainLocation;

@@ -17,9 +17,9 @@ function App() {
       <Header />
       <main className="App__main">
       <Switch>
-        <Route path="/weather-today" children={WeatherToday} />
-        <Route path="/weather-long-term" children={WeatherLongTerm} />
-        <Route path="/" children={MainLocation} />
+        <Route path="/weather-today" component={WeatherToday} />
+        <Route path="/weather-long-term" component={WeatherLongTerm} />
+        <Route path="/" component={MainLocation} />
       </Switch>
       </main>
       <footer className="App__footer">

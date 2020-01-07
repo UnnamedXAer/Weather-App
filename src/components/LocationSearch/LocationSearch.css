@@ -30,6 +30,16 @@
     padding-bottom: 0;
 }
 
+.location-search__input:valid + .location-search__label {
+    top: 0;
+    font-size: 1em;
+}
+
+.location-search__input:valid + .location-search__label .location-search__label-text {
+    padding-top: 5px;
+    padding-bottom: 0;
+}
+
 .location-search__label {
     position: absolute;
     top: calc(50% - 0.5em - 5px);

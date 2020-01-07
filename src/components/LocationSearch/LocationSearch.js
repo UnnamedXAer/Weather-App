@@ -3,13 +3,7 @@ import PropTypes from 'prop-types';
 import './LocationSearch.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const LocationSearch = props => {
-
-    const inputRef = useRef();
-
-    const labelFocusHandler = (ev) => {
-        inputRef.current.focus();
-    }
+const LocationSearch = ({ value, valueChanged }) => {
 
     let overlayTextClass = "";
 
@@ -26,15 +20,18 @@ const LocationSearch = props => {
             <span className="location-search__container">
             
                 <input 
+                    id="location"
                     className="location-search__input"
                     autoComplete="off"
-                    ref={inputRef}
                     type="text"
                     name="location"
                     onFocus={focusHandler}
                     onBlur={blurHandler}
+                    value={value}
+                    onChange={valueChanged}
+                    required
                     />
-                <label className={["location-search__label", overlayTextClass].join(" ")} htmlFor="location" onFocus={labelFocusHandler}>
+                <label className={["location-search__label", overlayTextClass].join(" ")} htmlFor="location">
                     <span className="location-search__label-text">Wpisz nazwę miejscowości</span>
                 </label>
             </span>
