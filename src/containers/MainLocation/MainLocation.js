@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './MainLocation.css';
 import LocationSearch from '../../components/LocationSearch/LocationSearch';
+// import Darksky from 'darkskyjs';
 
 const mainLocalization = props => {
     return (
