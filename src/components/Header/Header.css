@@ -36,8 +36,12 @@
 
 .header__nav a {
     margin: 0 10px;
-    display: block;
-    color: aliceblue;
+	display: block;
+	color: var(--color-green-light);
+}
+
+.header__nav a:active {
+	color: var(--color-green-dark);
 }
 
 .header__logo {

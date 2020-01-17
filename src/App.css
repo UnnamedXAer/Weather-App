@@ -2,6 +2,9 @@
   width: 100vw;
   height: 100vh;
   overflow: auto;
+  color: var(--color-main);  
+  background-color: var(--color-bg);
+  font-family: var(--font-family);
 }
 
 .App__main {
@@ -9,33 +12,5 @@
   height: calc(100% - var(--height-header) );
   width: 100%;
   max-width: var(--width-max);
-
-  border: 1px dashed whitesmoke;
-}
-
-.App__footer {
-  border-top: 2px solid purple;
-  width: 100%;
-
-}
-
-.App__footer__container {
-border: 1px dotted darkseagreen;
-
-  margin: 0 auto;
-  max-width: var(--width-max);
-  height: var(--height-footer);
-  
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.App__footer-powered-by-dark-sky {
-  height: 100%;
-}
-
-.App__footer-powered-by-dark-sky img {
-  max-height: 100%;
+  font-size: calc(10px + 2vmin);
 }

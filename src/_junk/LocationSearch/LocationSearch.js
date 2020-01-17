@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import './LocationSearch.css';
 import gpsIcon from '../../assets/images/gps.svg';
 import Spinner from '../UI/Spinner';
-import Button from '../UI/Button';
 
 const LocationSearch = ({ 
 	value, 
@@ -47,13 +46,13 @@ const LocationSearch = ({
 			<div>
 				{
 					geolocationLoading ? <Spinner />
-					: <Button 
+					: <button 
 						className="location-search__gps" 
 						onClick={getGeolocation} 
 						disabled={geolocationDisabled}
 					>
 						<img src={gpsIcon} alt="GPS" data-tip="Use Your position"/>
-					</Button>
+					</button>
 				}
 			</div>
         </section>
