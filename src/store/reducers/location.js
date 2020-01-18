@@ -8,6 +8,7 @@ const initialState = {
 
 	selectedLocation: null,
 	searchResults: [],
+	searchMetadata: {},
 	searchLoading: false,
 	searchError: null,
 
@@ -55,15 +56,20 @@ const fetchLocationsByPrefixStart = (state, action) => {
 	return {
 		...state,
 		searchResults: [],
+		searchMetadata: {},
 		searchLoading: true,
 		searchError: null
 	}
 };
 
 const fetchLocationsByPrefixSuccess = (state, action) => {
+	
+	const { locations, metadata } = action.payload;
+
 	return {
 		...state,
-		searchResults: action.payload,
+		searchResults: locations,
+		searchMetadata: metadata,
 		searchLoading: false,
 		searchError: null
 	}
@@ -73,6 +79,7 @@ const fetchLocationsByPrefixFail = (state, action) => {
 	return {
 		...state,
 		searchResults: [],
+		searchMetadata: {},
 		searchLoading: false,
 		searchError: action.error
 	}

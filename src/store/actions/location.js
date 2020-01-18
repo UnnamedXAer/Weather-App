@@ -9,14 +9,17 @@ export const setRedirectToCurrentWeather = (shouldRedirect) => {
 	};
 };
 
-export const fetchLocationsByPrefix = (prefix) => {
+export const fetchLocationsByPrefix = (prefix, offset) => {
 	return async dispatch => {
 		dispatch(fetchLocationsByPrefixStart());
 
 		try {
 			const payload = {
 				provider: 'geodb',
-				queryParams: prefix
+				queryParams: {
+					prefix,
+					offset
+				}
 			};
 			const { data } = await axios.post('/call-api', payload);
 			dispatch(fetchLocationsByPrefixSuccess(data));

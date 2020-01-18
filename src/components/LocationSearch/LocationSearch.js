@@ -27,6 +27,9 @@ const LocationSearch = ({
     return (
         <section className="location-search">
             <span className="location-search__container">
+				<label className={["location-search__label", overlayTextClass].join(" ")} htmlFor="location">
+                    <span className="location-search__label-text">Type Your City</span>
+                </label>
                 <input 
                     id="location"
                     className="location-search__input"
@@ -40,9 +43,6 @@ const LocationSearch = ({
                     onChange={valueChanged}
                     required
 				/>
-                <label className={["location-search__label", overlayTextClass].join(" ")} htmlFor="location">
-                    <span className="location-search__label-text">Type Your City</span>
-                </label>
             </span>
 			<div>
 				{

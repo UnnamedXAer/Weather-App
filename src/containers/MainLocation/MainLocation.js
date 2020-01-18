@@ -14,13 +14,25 @@ const MainLocation = (props) => {
 	const [locationText, setLocationText] = useState("");
 	
 	const locationInputRef = useRef(null);
+	let suggestionsCheckTimeoutRef = useRef(null);
 
 	useEffect(() => {
 		locationInputRef.current.focus();
 	}, []);
 
     const locationTextChangeHandler = (ev) => {
-        setLocationText(ev.target.value);
+
+		clearTimeout(suggestionsCheckTimeoutRef.current);
+
+		const { value } = ev.target;
+		setLocationText(value);
+
+		const trimmedValue = value.trimLeft();
+		if (trimmedValue.length > 1) {
+			suggestionsCheckTimeoutRef.current = setTimeout(() => {
+				props.fetchLocationsByPrefix(trimmedValue, 0);
+			}, 700);
+		}
 	};
 	
 	const getGeolocationHandler = async (ev) => {
@@ -58,6 +70,7 @@ const MainLocation = (props) => {
 				show={true}
 				loading={props.searchLoading}
 				locations={props.searchResults}
+				offsetInfo={props.searchMetadata}
 				selectLocation={selectLocationHandler}
 			/>
         </div>
@@ -73,7 +86,8 @@ MainLocation.propTypes = {
 
 	geolocation: PropTypes.object,
 	selectedLocation: PropTypes.object,
-	searchResults: PropTypes.arrayOf(PropTypes.object)
+	searchResults: PropTypes.arrayOf(PropTypes.object),
+	searchMetadata: PropTypes.object
 };
 
 const mapStateToProps = (state) => {
@@ -82,6 +96,7 @@ const mapStateToProps = (state) => {
 
 		selectedLocation: state.location.selectedLocation,
 		searchResults: state.location.searchResults,
+		searchMetadata: state.location.searchMetadata,
 		searchLoading: state.location.searchLoading,
 
 		geolocation: state.location.geolocation,
@@ -92,7 +107,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		fetchLocationsByPrefix: (prefix) => dispatch(actions.fetchLocationsByPrefix(prefix)),
+		fetchLocationsByPrefix: (prefix, offset) => dispatch(actions.fetchLocationsByPrefix(prefix, offset)),
 		fetchLocationByCoords: (coords) => dispatch(actions.fetchLocationByCoords(coords))
 	};
 };
