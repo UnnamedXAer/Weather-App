@@ -1,28 +1,21 @@
 .location-search {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .location-search__container {
-	margin: 0 auto;
-    position: relative;
     display: block;
-    width: 50%;
     min-width: 400px;
 }
 
-.location-search__input {
-	font-size: 1.8em;
-	font-family: inherit;
-	outline: none;
-}
-
-.location-search__label {
-    font-size: 1.8em;
-    transition: all 1s;
-}
-
-.location-search__label-text {
-    padding: 10px 16px;
+.location-search__input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid var(--color-main);
+    margin-bottom: 16px;
 }
 
 .location-search__gps {

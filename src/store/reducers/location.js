@@ -1,6 +1,8 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
+	currentLocation: null,
+
 	geolocation: null,
 	geolocationDisabled: false,
 	geolocationLoading: false,
@@ -14,6 +16,13 @@ const initialState = {
 
 	redirectToCurrentWeather: false
 };
+
+const setCurrentLocation = (state, action) => {
+	return {
+		...state,
+		currentLocation: action.location
+	}
+} 
 
 const setRedirectToCurrentWeather = (state, action) => {
 	return {
@@ -87,6 +96,7 @@ const fetchLocationsByPrefixFail = (state, action) => {
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
+		case actionTypes.SET_CURRENT_LOCATION: return setCurrentLocation(state, action);
 		case actionTypes.SET_REDIRECT_TO_CURRENT_WEATHER: return setRedirectToCurrentWeather(state, action);
 
 		case actionTypes.FETCH_LOCATIONS_BY_PREFIX_START: return fetchLocationsByPrefixStart(state, action);

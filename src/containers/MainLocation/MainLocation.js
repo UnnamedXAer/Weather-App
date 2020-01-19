@@ -1,115 +1,31 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './MainLocation.css';
 import ReactTooltip from 'react-tooltip';
-import LocationSearch from '../../components/LocationSearch/LocationSearch';
-import LocationSearchResults from '../../components/LocationSearch/LocationSearchResults/LocationSearchResults';
+import LocationSearch from './LocationSearch/LocationSearch';
 import { connect } from 'react-redux';
-import * as actions from '../../store/actions';
-import { getLocation, getLocationErrorMessage } from '../../utils/geolocation';
 import { Redirect } from 'react-router-dom';
 
 const MainLocation = (props) => {
 
-	const [locationText, setLocationText] = useState("");
-	
-	const locationInputRef = useRef(null);
-	let suggestionsCheckTimeoutRef = useRef(null);
-
-	useEffect(() => {
-		locationInputRef.current.focus();
-	}, []);
-
-    const locationTextChangeHandler = (ev) => {
-
-		clearTimeout(suggestionsCheckTimeoutRef.current);
-
-		const { value } = ev.target;
-		setLocationText(value);
-
-		const trimmedValue = value.trimLeft();
-		if (trimmedValue.length > 1) {
-			suggestionsCheckTimeoutRef.current = setTimeout(() => {
-				props.fetchLocationsByPrefix(trimmedValue, 0);
-			}, 700);
-		}
-	};
-	
-	const getGeolocationHandler = async (ev) => {
-		let location;
-		try {
-			location = await getLocation();
-			console.log('geolocation ', location);
-		}
-		catch (err) {
-			console.error(getLocationErrorMessage(err));
-		}
-
-		props.fetchLocationByCoords(location.coords);
-	};
-
-	const selectLocationHandler = (index) => {
-		// dispatch setLocation
-	}
-
     return (
-        <div className="main-location">
+        <section className="main-location">
 			{props.redirectToCurrentWeather && <Redirect to="/weather-today" />}
-			<ReactTooltip delayShow={400} effect="solid" />
+			<ReactTooltip delayShow={400} effect="solid" multiline={true} />
             <h1>Search for Your City</h1>
-            <LocationSearch 
-                valueChanged={locationTextChangeHandler}
-				value={locationText}
-				geolocationLoading={props.geolocationLoading}
-				geolocationDisabled={props.geolocationDisabled}
-				locationInputRef={locationInputRef}
-				getGeolocation={getGeolocationHandler}
-				
-            />
-			<LocationSearchResults 
-				show={true}
-				loading={props.searchLoading}
-				locations={props.searchResults}
-				offsetInfo={props.searchMetadata}
-				selectLocation={selectLocationHandler}
-			/>
-        </div>
+            <LocationSearch />
+        </section>
     );
 };
 
 MainLocation.propTypes = {
 	redirectToCurrentWeather: PropTypes.bool,
-
-	searchLoading: PropTypes.bool,
-	geolocationLoading: PropTypes.bool,
-	geolocationDisabled: PropTypes.bool,
-
-	geolocation: PropTypes.object,
-	selectedLocation: PropTypes.object,
-	searchResults: PropTypes.arrayOf(PropTypes.object),
-	searchMetadata: PropTypes.object
 };
 
 const mapStateToProps = (state) => {
 	return {
-		redirectToCurrentWeather: state.location.redirectToCurrentWeather,
-
-		selectedLocation: state.location.selectedLocation,
-		searchResults: state.location.searchResults,
-		searchMetadata: state.location.searchMetadata,
-		searchLoading: state.location.searchLoading,
-
-		geolocation: state.location.geolocation,
-		geolocationLoading: state.location.geolocationLoading,
-		geolocationDisabled: state.location.geolocationDisabled
+		redirectToCurrentWeather: state.location.redirectToCurrentWeather
 	};
 };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		fetchLocationsByPrefix: (prefix, offset) => dispatch(actions.fetchLocationsByPrefix(prefix, offset)),
-		fetchLocationByCoords: (coords) => dispatch(actions.fetchLocationByCoords(coords))
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainLocation);
+export default connect(mapStateToProps)(MainLocation);

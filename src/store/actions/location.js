@@ -1,6 +1,12 @@
 import axios, { logReqError } from '../../axios/axios';
 import * as actionTypes from './actionTypes';
 
+export const setCurrentLocation = (location) => {
+	return {
+		type: actionTypes.SET_CURRENT_LOCATION,
+		location
+	};
+};
 
 export const setRedirectToCurrentWeather = (shouldRedirect) => {
 	return {
