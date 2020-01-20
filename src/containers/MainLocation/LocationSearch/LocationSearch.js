@@ -33,7 +33,7 @@ const LocationSearch = (props) => {
 		if (trimmedValue.length > 1) {
 			suggestionsCheckTimeoutRef.current = setTimeout(() => {
 				setShowResults(true);
-				props.fetchLocationsByPrefix(trimmedValue, 0);
+				// props.fetchLocationsByPrefix(trimmedValue, 0);
 			}, 700);
 		}
 	};
@@ -48,12 +48,12 @@ const LocationSearch = (props) => {
 			console.error(getLocationErrorMessage(err));
 		}
 
-		props.fetchLocationByCoords(location.coords);
+		// props.fetchLocationByCoords(location.coords);
 	};
 
 	const changePageHandler = (offset) => {
 		const trimmedValue = locationText.trimLeft();
-		props.fetchLocationsByPrefix(trimmedValue, offset);
+		// props.fetchLocationsByPrefix(trimmedValue, offset);
 	};
 
 	const selectLocationHandler = (index) => {

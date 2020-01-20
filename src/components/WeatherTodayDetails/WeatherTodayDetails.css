@@ -1,0 +1,22 @@
+.weather-today-details {
+	color: black;
+	font-size: 0.9em;
+}
+
+.weather-today-details__table {
+	/* border: 1px solid palevioletred; */
+	border-left: none;
+	box-shadow: 2px 2px 6px palevioletred;
+	margin: 16px auto;
+	padding: 16px;
+}
+
+.weather-today-details__cell {
+	padding: 5px 10px;
+	border-bottom: 1px solid palevioletred;	
+	font-weight: 900;
+}
+
+.weather-today-details__cell::first-letter {
+	text-transform: uppercase;
+}

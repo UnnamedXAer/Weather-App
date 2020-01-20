@@ -9,7 +9,7 @@
 
 .App__main {
   margin: 0 auto;
-  height: calc(100% - var(--height-header) );
+  min-height: calc(100% - var(--height-header) );
   width: 100%;
   max-width: var(--width-max);
   font-size: calc(10px + 2vmin);

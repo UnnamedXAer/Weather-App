@@ -1,5 +1,26 @@
 .weather-today {
-    border: 1px solid tomato;
-    width: 100%;
-    min-height: 300px;
+	margin: 0 auto;
+	padding: 0 30px;
+	width: 100%;
+	max-width: 1000px;
+}
+
+.weather-today__container {
+	padding: 10px 30px;
+	text-align: center;
+	background-color: papayawhip;
+}
+
+.weather-today__temperature {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.weather-today__icon {
+	margin: 0 16px;
+	padding: 10px;
+	background-color: white;
+	border-radius: 50%;
 }
