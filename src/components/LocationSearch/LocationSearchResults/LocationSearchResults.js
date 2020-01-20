@@ -32,7 +32,7 @@ const LocationSearchResults = ({ show, loading, locations, selectLocation, offse
 		else {
 			content = (<ul className="location-results__list">
 				{locations.map((city, i) => (
-					<ol location-results__element key={i} onClick={(ev) => selectLocation(i)}>
+					<ol className="location-results__element" key={i} onClick={(ev) => selectLocation(i)}>
 						<p className="location-results__location-name">{city.city}, ({city.countryCode})</p>
 						<p className="location-results__location-country">{city.country} ({city.region})</p>
 					</ol>

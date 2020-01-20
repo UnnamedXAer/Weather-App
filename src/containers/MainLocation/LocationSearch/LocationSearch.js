@@ -73,15 +73,16 @@ const LocationSearch = (props) => {
 						valueChanged={locationTextChangeHandler}
 					/>
 				</div>
-				<div>
-					{
-						props.geolocationLoading ? <Spinner />
-						: <Button 
-							className="location-search__gps" 
+				<div className="location-search__gps">
+					{props.geolocationLoading ? <Spinner /> :						
+						<Button 
+							data-tip="Use Your position"
 							onClick={getGeolocationHandler} 
 							disabled={props.geolocationDisabled}
 						>
-							<img src={gpsIcon} alt="GPS" data-tip="Use Your position"/>
+							<svg>
+								<use xlinkHref={`${gpsIcon}#gps_icon`} />	
+							</svg>
 						</Button>
 					}
 				</div>

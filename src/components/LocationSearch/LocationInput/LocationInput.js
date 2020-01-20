@@ -13,7 +13,6 @@ const LocationInput = ({ value, valueChanged, inputRef }) => {
         ref={inputRef}
         value={value}
         onChange={valueChanged}
-        required
         placeholder="Type Your City"
     />;
 };
