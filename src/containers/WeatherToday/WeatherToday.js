@@ -7,14 +7,13 @@ import { connect } from 'react-redux'
 import * as actions from '../../store/actions';
 import { addUnits } from '../../utils/units';
 
-const WeatherToday = ({ setRedirectToCurrentWeather, location, weatherData, fetchCurrentWeather }) => {
-console.log('weatherData', weatherData)
+const WeatherToday = ({ setRedirectToCurrentWeather, location, currentWeather, fetchCurrentWeather }) => {
 
-	// useEffect(() => {
-	// 	if (location) {
-	// 		fetchCurrentWeather(location);
-	// 	}
-	// }, [location, fetchCurrentWeather]);
+	useEffect(() => {
+		if (location) {
+			fetchCurrentWeather(location);
+		}
+	}, [location, fetchCurrentWeather]);
 
     useEffect(() => {
         setRedirectToCurrentWeather(false);
@@ -22,22 +21,28 @@ console.log('weatherData', weatherData)
 
 	let content;
 	if (location) {
-		const iconSrc = `http://openweathermap.org/img/wn/${weatherData.imgName}@2x.png`;
-		content = <>
-			<section className="weather-today__container">
-				<h1>{location.city}{(location.country ? `, ${location.country}` : (location.countryCode ? `, ${location.countryCode}` : ""))}</h1>
-				<section className="weather-today__temperature">
-					<div>
-						<p>Current temperature: <strong>{addUnits(weatherData.temperature.main)}</strong></p>
-						<p>Feels Like: <strong>{addUnits(weatherData.temperature.feelsLike)}</strong></p>
-					</div>
-					<div className="weather-today__icon">
-						<img src={iconSrc} alt={weatherData.shortDescription} />
-					</div>
+		if (currentWeather) {
+			const { weatherData } = currentWeather;
+			const iconSrc = `http://openweathermap.org/img/wn/${weatherData.imgName}@2x.png`;
+			content = <>
+				<section className="weather-today__container">
+					<h1>{location.city}{(location.country ? `, ${location.country}` : (location.countryCode ? `, ${location.countryCode}` : ""))}</h1>
+					<section className="weather-today__temperature">
+						<div>
+							<p>Current temperature: <strong style={{fontSize: '1.4em'}}>{addUnits(weatherData.temperature.main)}</strong></p>
+							<p>Feels Like: <strong>{addUnits(weatherData.temperature.feelsLike)}</strong></p>
+						</div>
+						<div className="weather-today__icon">
+							<img src={iconSrc} alt={weatherData.shortDescription} />
+						</div>
+					</section>
 				</section>
-			</section>
-			<WeatherTodayDetails location={location} weatherData={weatherData} />
-		</>
+				<WeatherTodayDetails location={location} weatherData={weatherData} />
+			</>;
+		}
+		else {
+			content = <p>Could not retrieve weather data.</p>
+		}
 	}
 	else {
 		content = <p>Please go to <Link to="/">Location</Link> and select location first.</p>
@@ -53,14 +58,15 @@ console.log('weatherData', weatherData)
 
 WeatherToday.propTypes = {
 	setRedirectToCurrentWeather: PropTypes.func,
+	fetchCurrentWeather: PropTypes.func,
 	
 	location: PropTypes.object,
-	weatherData: PropTypes.object
+	currentWeather: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
 	location: state.location.currentLocation,
-	weatherData: state.weather.currentWeather
+	currentWeather: state.weather.currentWeather
 });
 
 const mapDispatchToProps = dispatch => {

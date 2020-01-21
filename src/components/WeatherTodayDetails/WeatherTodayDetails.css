@@ -3,6 +3,13 @@
 	font-size: 0.9em;
 }
 
+.weather-today-details__date {
+	align-self: flex-end;
+	font-size: 0.6em;
+	width: 100%;
+	text-align: end;
+}
+
 .weather-today-details__table {
 	/* border: 1px solid palevioletred; */
 	border-left: none;

@@ -13,6 +13,7 @@ const WeatherTodayDetails = ({ weatherData, location }) => {
 
 	return (
 		<div className="weather-today-details">
+			<p className="weather-today-details__date">Data forecasted at: {dateToLocalString(weatherData.dt, 'shortDT')}</p>
 			<table className="weather-today-details__table">
 				<tbody>
 					<tr>

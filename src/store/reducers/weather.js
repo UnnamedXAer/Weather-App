@@ -1,49 +1,51 @@
 import * as actionTypes from '../actions/actionTypes';
 
-// const initialState = {
-// 	currentWeather: null,
-// 	currentWeatherError: null,
-// 	currentWeatherLoading: false,
-// 	forecastWeather: null,
-// 	forecastWeatherError: null,
-// 	forecastWeatherLoading: false
-// };
-
 const initialState = {
-	currentWeather: {
-		imgName: '04d',
-		temperature: {
-			main: 3.49,
-			feelsLike: -1.47,
-			min: 1.67,
-			max: 5
-		},
-		pressure: 1043,
-		humidity: 74,
-		wind: {
-			speed: 4.1,
-			deg: 280
-		},
-		time: 1579520113000,
-		sunrise: 1579502026,
-		sunset: 1579532363,
-		visibility: 10000,
-		description: 'broken clouds',
-		shortDescription: 'Clouds',
-		clouds: 75
-	},
-	location: {
-		id: 756135,
-		city: 'Warsaw',
-		latitude: 52.23,
-		longitude: 21.01
-	},
+	currentWeather: null,
 	currentWeatherError: null,
 	currentWeatherLoading: false,
 	forecastWeather: null,
 	forecastWeatherError: null,
 	forecastWeatherLoading: false
 };
+
+// const initialState = {
+// 	currentWeather: {
+	// weatherDate: {
+// 		imgName: '04d',
+// 		temperature: {
+// 			main: 3.49,
+// 			feelsLike: -1.47,
+// 			min: 1.67,
+// 			max: 5
+// 		},
+// 		pressure: 1043,
+// 		humidity: 74,
+// 		wind: {
+// 			speed: 4.1,
+// 			deg: 280
+// 		},
+// 		time: 1579520113000,
+// 		sunrise: 1579502026,
+// 		sunset: 1579532363,
+// 		visibility: 10000,
+// 		description: 'broken clouds',
+// 		shortDescription: 'Clouds',
+// 		clouds: 75
+// 	},
+// 	location: {
+// 		id: 756135,
+// 		city: 'Warsaw',
+// 		latitude: 52.23,
+// 		longitude: 21.01
+// 	}
+// },
+// 	currentWeatherError: null,
+// 	currentWeatherLoading: false,
+// 	forecastWeather: null,
+// 	forecastWeatherError: null,
+// 	forecastWeatherLoading: false
+// };
 
 const fetchCurrentWeatherStart = (state, action) => {
 	return {
