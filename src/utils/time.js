@@ -39,9 +39,9 @@ export function dateToLocalString(date, format) {
 	let options = formats[format+'Options'];
 	if (!options) console.log('date/time "format" is not recognized');
 	if (date instanceof Date) {
-		return date.toLocaleString(navigator.language, options);
+		return date.toLocaleString('en', options);
 	}
 	else {
-		return new Date(date).toLocaleString(navigator.language, options || allDateOptions);
+		return new Date(date).toLocaleString('en', options || allDateOptions);
 	}
 }

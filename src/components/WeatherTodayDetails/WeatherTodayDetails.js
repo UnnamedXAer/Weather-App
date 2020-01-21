@@ -2,8 +2,9 @@ import React from 'react';
 import './WeatherTodayDetails.css';
 import { dateToLocalString } from '../../utils/time';
 import Spinner from '../UI/Spinner';
+import ErrorPanel from '../ErrorPanel/ErrorPanel';
 
-const WeatherTodayDetails = ({ weatherData, location, loading }) => {
+const WeatherTodayDetails = ({ weatherData, location, loading, error }) => {
 	const openWeatherMapUrl = `https://openweathermap.org/weathermap
 		?basemap=map
 		&cities=true
@@ -12,9 +13,12 @@ const WeatherTodayDetails = ({ weatherData, location, loading }) => {
 		&lon=${location.longitude}
 		&zoom=7`;
 
+	if (error) {
+		return <ErrorPanel message={error} />;
+	}
 	return (
 		<div className="weather-today-details">
-			{loading ? <Spinner />
+			{loading ? <div className="weather-today-details__spinner"><Spinner /></div>
 				: weatherData && <>{weatherData.dt && <p className="weather-today-details__date">Data forecasted at: {dateToLocalString(weatherData.dt, 'shortDT')}</p>}
 					<table className="weather-today-details__table">
 						<tbody>

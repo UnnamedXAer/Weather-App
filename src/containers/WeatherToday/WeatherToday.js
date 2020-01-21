@@ -8,9 +8,15 @@ import { connect } from 'react-redux'
 import * as actions from '../../store/actions';
 import { addUnits } from '../../utils/units';
 import PageLocationHeader from '../../components/PageLocationHeader/PageLocationHeader';
-import ErrorPanel from '../../components/ErrorPanel/ErrorPanel';
 
-const WeatherToday = ({ setRedirectToCurrentWeather, location, currentWeather, fetchCurrentWeather, currentWeatherLoading, currentWeatherError }) => {
+const WeatherToday = ({ 
+	setRedirectToCurrentWeather, 
+	location, 
+	currentWeather, 
+	fetchCurrentWeather, 
+	loading, 
+	error 
+}) => {
 
 	useEffect(() => {
 		if (location) {
@@ -18,44 +24,42 @@ const WeatherToday = ({ setRedirectToCurrentWeather, location, currentWeather, f
 		}
 	}, [location, fetchCurrentWeather]);
 
-    useEffect(() => {
-        setRedirectToCurrentWeather(false);
+	useEffect(() => {
+		setRedirectToCurrentWeather(false);
 	}, [setRedirectToCurrentWeather]);
 
-	let content;
-	if (location) {
-		if (currentWeather) {
-			const { weatherData } = currentWeather;
-			const iconSrc = `http://openweathermap.org/img/wn/${weatherData.imgName}@2x.png`;
-			content = <>
-				<section className="weather-today__container">
-					<PageLocationHeader location={location} />
-					{currentWeatherLoading ? <Spinner />
-					: <section className="weather-today__temperature">
-							<div>
-								<p>Current temperature: <strong style={{fontSize: '1.4em'}}>{addUnits(weatherData.temperature.main)}</strong></p>
-								<p>Feels Like: <strong>{addUnits(weatherData.temperature.feelsLike)}</strong></p>
-							</div>
-							<div className="weather-today__icon">
-								<img src={iconSrc} alt={weatherData.shortDescription} />
-							</div>
-					</section>}
-				</section>
-				<WeatherTodayDetails loading={currentWeatherLoading} location={location} weatherData={weatherData} />
-			</>;
-		}
-		else {
-			content = <ErrorPanel message={currentWeatherError} />
-		}
-	}
-	else {
-		content = <p>Please go to <Link to="/">Location</Link> and select location first.</p>
-	}
+	const weatherData = (loading || error) ? null : currentWeather.weatherData;
+
+	const temperatureJsx = <section className="weather-today__container">
+			{location ? <PageLocationHeader location={location} />
+				: <p>Please go to <Link to="/">Location</Link> and select location first.</p>}
+			{loading 
+				? <Spinner />
+				: !error && <section className="weather-today__temperature">
+					<div>
+						<p>Current temperature: 
+							<strong style={{ fontSize: '1.4em' }}>
+								{addUnits(weatherData.temperature.main)}
+							</strong>
+						</p>
+						<p>Feels Like: <strong>{addUnits(weatherData.temperature.feelsLike)}</strong></p>
+					</div>
+					<div className="weather-today__icon">
+						<img src={`http://openweathermap.org/img/wn/${weatherData.imgName}@2x.png`} 
+							alt={weatherData.shortDescription} />
+					</div>
+				</section>}
+		</section>;
 
 	return (
 		<section className="weather-today">
 			<h1>Weather Today</h1>
-			{content}
+			{temperatureJsx}
+			<WeatherTodayDetails 	
+			loading={loading} 
+			error={error}
+			location={location} 
+			weatherData={weatherData} />
 		</section>
 	);
 };
@@ -63,25 +67,25 @@ const WeatherToday = ({ setRedirectToCurrentWeather, location, currentWeather, f
 WeatherToday.propTypes = {
 	setRedirectToCurrentWeather: PropTypes.func,
 	fetchCurrentWeather: PropTypes.func,
-	
+
 	location: PropTypes.object,
 	currentWeather: PropTypes.object,
-	currentWeatherLoading: PropTypes.bool,
-	currentWeatherError: PropTypes.string
+	loading: PropTypes.bool,
+	error: PropTypes.string
 };
 
 const mapStateToProps = (state) => ({
 	location: state.location.currentLocation,
 	currentWeather: state.weather.currentWeather,
-	currentWeatherLoading: state.weather.currentWeatherLoading,
-	currentWeatherError: state.weather.currentWeatherError,
+	loading: state.weather.currentWeatherLoading,
+	error: state.weather.currentWeatherError,
 });
 
 const mapDispatchToProps = dispatch => {
-    return {
+	return {
 		setRedirectToCurrentWeather: (shouldRedirect) => dispatch(actions.setRedirectToCurrentWeather(shouldRedirect)),
 		fetchCurrentWeather: (location) => dispatch(actions.fetchCurrentWeather(location))
-    };
+	};
 };
 
 
