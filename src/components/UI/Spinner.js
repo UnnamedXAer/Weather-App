@@ -27,7 +27,6 @@ const Spinner = styled.div`
 
 	::before  {
 		margin: 10px;
-		/*padding: 70%;*/
 		box-sizing: content-box;
 		content: ' ';
 		width: 40px;

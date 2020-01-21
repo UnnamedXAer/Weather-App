@@ -12,10 +12,6 @@ const ErrorPanel = ({ message, showHeader }) => {
 			</span>
 			<div className="error-panel__icon-container">
 				<FontAwesomeIcon className="error-panel__icon" icon="dizzy" />
-				<div className="error-panel__icon-neck"></div>
-				<div className="error-panel__icon-arm"></div>
-				<div className="error-panel__icon-body"></div>
-				<div className="error-panel__icon-arm"></div>
 			</div>
 		</section>
 	);
