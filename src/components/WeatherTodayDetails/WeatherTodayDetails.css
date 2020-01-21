@@ -12,7 +12,7 @@
 
 .weather-today-details__table {
 	/* border: 1px solid palevioletred; */
-	border-left: none;
+	/* border-left: none; */
 	box-shadow: 2px 2px 6px palevioletred;
 	margin: 16px auto;
 	padding: 16px;

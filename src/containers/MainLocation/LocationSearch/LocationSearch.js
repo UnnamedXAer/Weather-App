@@ -52,7 +52,7 @@ const LocationSearch = (props) => {
 	};
 
 	const changePageHandler = (offset) => {
-		const trimmedValue = locationText.trimLeft();
+		// const trimmedValue = locationText.trimLeft();
 		// props.fetchLocationsByPrefix(trimmedValue, offset);
 	};
 

@@ -7,8 +7,8 @@ import WeatherLongTerm from './containers/WeatherLongTerm/WeatherLongTerm';
 import WeatherToday from './containers/WeatherToday/WeatherToday';
 import Footer from './components/Footer/Footer';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUmbrella, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-library.add(faUmbrella, faMapMarkerAlt);
+import { faUmbrella, faMapMarkerAlt, faDizzy } from '@fortawesome/free-solid-svg-icons';
+library.add(faUmbrella, faMapMarkerAlt, faDizzy);
 
 function App() {
   return (

@@ -1,0 +1,82 @@
+.error-panel {
+	color: tomato;
+	box-shadow: 2px 2px 6px tomato;
+	width: 100%;
+	padding: 30px;
+	white-space: pre-line;
+	font-size: 0.9em;
+	display: flex;
+	justify-content: space-between;
+}
+
+.error-panel__message {
+	padding: 0 16px;
+}
+
+.error-panel__icon-container {
+	position: relative;
+	/* width: 100px; */
+	/* height: 100px; */
+	font-size: 100px;
+	background-color: white;
+	border: 1px solid springgreen;
+}
+
+.error-panel__icon-neck,
+.error-panel__icon_body,
+.error-panel__icon_arm {
+	position: absolute;
+	background-color: brown;
+	border: 2px solid darkblue;
+}
+
+.error-panel__icon-neck {
+	width: 40px;
+	height: 30px;
+	top: 115px;
+	left: 30px;
+	border-radius: 10px 10px 0 0;
+}
+
+.error-panel__icon-body {
+	width: 140px;
+	height: 100px;
+	top: 155px;
+	left: 20px;
+	border-radius: 10px 10px 0 0;
+	
+}
+
+.error-panel__icon {
+	animation: 2s ease-in-out infinite move-emoji;
+}
+
+@keyframes move-emoji {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	15% {
+		transform: rotate(-20deg‬);
+	}
+
+	30% {
+		transform: rotate(-45deg);
+	}
+
+	45% {
+		transform: rotate(-10deg);
+	}
+
+	60% {
+		transform: rotate(10deg);
+	}
+
+	80% {
+		transform: rotate(40deg);
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
+}
