@@ -34,14 +34,14 @@
     align-items: stretch;
 }
 
-.header__nav a {
+.header__nav-item {
     margin: 0 10px;
 	display: block;
 	color: var(--color-green-light);
 }
 
-.header__nav a:active {
-	color: var(--color-green-dark);
+.header__nav-item--active {
+	color:  #b30000;
 }
 
 .header__logo {

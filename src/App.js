@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import MainLocation from './containers/MainLocation/MainLocation';
 import WeatherLongTerm from './containers/WeatherLongTerm/WeatherLongTerm';
 import WeatherToday from './containers/WeatherToday/WeatherToday';
@@ -18,7 +18,8 @@ function App() {
       <Switch>
         <Route path="/weather-today" component={WeatherToday} />
         <Route path="/weather-long-term" component={WeatherLongTerm} />
-        <Route path="/" component={MainLocation} />
+        <Route path="/" exact component={MainLocation} />
+        <Redirect to="/" />
       </Switch>
       </main>
       <Footer />
