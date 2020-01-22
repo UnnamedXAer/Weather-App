@@ -34,9 +34,6 @@ const LocationSearch = (props) => {
 			suggestionsCheckTimeoutRef.current = setTimeout(() => {
 				setShowResults(true);
 				props.fetchLocationsByPrefix(trimmedValue, 0);
-				
-				// const url = "http://gd.geobytes.com/AutoCompleteCity?callback="+CallbackFunction +"&filter=" + CountryCodeComaSeparated + "&q=" + Prefix;
-
 			}, 700);
 		}
 	};
@@ -45,26 +42,24 @@ const LocationSearch = (props) => {
 		let location;
 		try {
 			location = await getLocation();
-			console.log('geolocation ', location);
 		}
 		catch (err) {
 			console.error(getLocationErrorMessage(err));
 		}
 
-		// props.fetchLocationByCoords(location.coords);
+		props.fetchLocationByCoords(location.coords);
 	};
 
 	const changePageHandler = (offset) => {
-		// const trimmedValue = locationText.trimLeft();
-		// props.fetchLocationsByPrefix(trimmedValue, offset);
+		const trimmedValue = locationText.trimLeft();
+		props.fetchLocationsByPrefix(trimmedValue, offset);
 	};
 
 	const selectLocationHandler = (index) => {
 		const location = props.searchResults[index];
-		console.log('location', JSON.stringify(location, null, '\t'));
 		props.setCurrentLocation(location);
 		props.setRedirectToCurrentWeather(true);
-	}
+	};
 
     return (
         <section className="location-search">
