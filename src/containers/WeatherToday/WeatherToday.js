@@ -9,14 +9,15 @@ import * as actions from '../../store/actions';
 import { addUnits } from '../../utils/units';
 import PageLocationHeader from '../../components/PageLocationHeader/PageLocationHeader';
 import ErrorPanel from '../../components/ErrorPanel/ErrorPanel';
+import ReactTooltip from 'react-tooltip';
 
-const WeatherToday = ({ 
-	setRedirectToCurrentWeather, 
-	location, 
-	currentWeather, 
-	fetchCurrentWeather, 
-	loading, 
-	error 
+const WeatherToday = ({
+	setRedirectToCurrentWeather,
+	location,
+	currentWeather,
+	fetchCurrentWeather,
+	loading,
+	error
 }) => {
 
 	useEffect(() => {
@@ -33,6 +34,7 @@ const WeatherToday = ({
 
 	return (
 		<section className="weather-today">
+
 			<h1>Weather Today</h1>
 			<section className="weather-today__container">
 				{!location ? <p>Please go to <Link to="/">Location</Link> and select location first.</p>
@@ -40,17 +42,22 @@ const WeatherToday = ({
 						<PageLocationHeader location={location} />
 						{loading ? <Spinner />
 							: weatherData && <section className="weather-today__temperature">
+								<ReactTooltip
+									className="weather-today__tooltip"
+									delayShow={300}
+									effect="solid"
+									multiline={true} />
 								<div>
 									<p>Current temperature:
 									<strong style={{ fontSize: '1.4em' }}>
 											{" " + addUnits(weatherData.temperature.main)}
-									</strong>
+										</strong>
 									</p>
 									<p>
 										Feels Like: <strong>{addUnits(weatherData.temperature.feelsLike)}</strong>
 									</p>
 								</div>
-								<div className="weather-today__icon">
+								<div className="weather-today__icon" data-tip={weatherData.description}>
 									<img src={`http://openweathermap.org/img/wn/${weatherData.imgName}@2x.png`}
 										alt={weatherData.shortDescription} />
 								</div>
@@ -58,10 +65,10 @@ const WeatherToday = ({
 					</>}
 			</section>
 			{error ? <ErrorPanel message={error} />
-			: <WeatherTodayDetails 	
-				loading={loading} 
-				location={location} 
-				weatherData={weatherData} />}
+				: <WeatherTodayDetails
+					loading={loading}
+					location={location}
+					weatherData={weatherData} />}
 		</section>
 	);
 };

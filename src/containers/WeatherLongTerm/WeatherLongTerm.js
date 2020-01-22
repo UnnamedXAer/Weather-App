@@ -27,38 +27,38 @@ const WeatherLongTerm = ({ fetchForecastWeather, location, forecastData, error, 
 	const weatherData = forecastData ? forecastData.weatherData : null;
 
 	const content = error ? <ErrorPanel message={error} /> : <section className="weather-long-term__container">
-			{loading ? <Spinner /> : <div>
-				{weatherData && weatherData.map((x, i) => {
-					const iconSrc = `http://openweathermap.org/img/wn/${x.imgName}@2x.png`;
-					return (<div
-						className="weather-long-term__col"
-						key={i}
-						onClick={() => showWeatherColDetails(i)}
-						data-tip={x.description}
-					>
-						<p>{dateToLocalString(x.time, 'shortDT')}</p>
-						<div className="weather-long-term__col-img">
-							<img src={iconSrc} alt={forecastData.shortDescription} />
-							<p style={{ fontSize: "0.7em" }}>clouds: {x.clouds}%</p>
-						</div>
-						<div>
-							<p style={{ fontSize: "1.1em" }}><strong>{addUnits(x.temperature.main)}</strong></p>
-							<p style={{ fontSize: "0.7em" }}>Feels Like: <br /><strong>{addUnits(x.temperature.feelsLike)}</strong></p>
-						</div>
-					</div>);
-				})}
-			</div>}
-		</section>
-
-    return (
-        <section className="weather-long-term">
+		{loading ? <Spinner /> : <div>
 			<ReactTooltip
 				className="weather-long-term__tooltip"
 				delayShow={300}
 				effect="solid"
 				multiline={true} />
-            <h1>Weather Long Term</h1>
-			{location 
+			{weatherData && weatherData.map((x, i) => {
+				const iconSrc = `http://openweathermap.org/img/wn/${x.imgName}@2x.png`;
+				return (<div
+					className="weather-long-term__col"
+					key={i}
+					onClick={() => showWeatherColDetails(i)}
+					data-tip={x.description}
+				>
+					<p>{dateToLocalString(x.time, 'shortDT')}</p>
+					<div className="weather-long-term__col-img">
+						<img src={iconSrc} alt={forecastData.shortDescription} />
+						<p style={{ fontSize: "0.7em" }}>clouds: {x.clouds}%</p>
+					</div>
+					<div>
+						<p style={{ fontSize: "1.1em" }}><strong>{addUnits(x.temperature.main)}</strong></p>
+						<p style={{ fontSize: "0.7em" }}>Feels Like: <br /><strong>{addUnits(x.temperature.feelsLike)}</strong></p>
+					</div>
+				</div>);
+			})}
+		</div>}
+	</section>
+
+	return (
+		<section className="weather-long-term">
+			<h1>Weather Long Term</h1>
+			{location
 				? <PageLocationHeader
 					location={location}
 					style={{
@@ -70,8 +70,8 @@ const WeatherLongTerm = ({ fetchForecastWeather, location, forecastData, error, 
 				: <div className="weather-long-term__missing-location"><p>Please go to <Link to="/">Location</Link> and select location first.</p></div>}
 
 			{content}
-        </section>
-    );
+		</section>
+	);
 };
 
 WeatherLongTerm.propTypes = {
