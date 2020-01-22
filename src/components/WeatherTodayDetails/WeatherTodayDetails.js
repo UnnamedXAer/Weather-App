@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './WeatherTodayDetails.css';
 import { dateToLocalString } from '../../utils/time';
 import Spinner from '../UI/Spinner';
@@ -16,8 +17,12 @@ const WeatherTodayDetails = ({ weatherData, location, loading }) => {
 								<td className="weather-today-details__cell">{weatherData.wind.speed} m/s</td>
 							</tr>
 							<tr>
+								<td className="weather-today-details__cell">Clouds</td>
+								<td className="weather-today-details__cell">{weatherData.clouds}%</td>
+							</tr>
+							<tr>
 								<td className="weather-today-details__cell">Cloudiness</td>
-								<td className="weather-today-details__cell">{weatherData.description}<span> ({weatherData.clouds}%)</span></td>
+								<td className="weather-today-details__cell">{weatherData.description}</td>
 							</tr>
 							<tr>
 								<td className="weather-today-details__cell">Pressure</td>
@@ -68,5 +73,11 @@ const WeatherTodayDetails = ({ weatherData, location, loading }) => {
 		</div>
 	);
 };
+
+WeatherTodayDetails.propTypes = {
+	weatherData: PropTypes.object,
+	location: PropTypes.object,
+	loading: PropTypes.bool
+}
 
 export default WeatherTodayDetails;
