@@ -19,7 +19,7 @@ const MainLocation = (props) => {
 };
 
 MainLocation.propTypes = {
-	redirectToCurrentWeather: PropTypes.bool,
+	redirectToCurrentWeather: PropTypes.bool
 };
 
 const mapStateToProps = (state) => {

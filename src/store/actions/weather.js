@@ -22,7 +22,6 @@ export const fetchCurrentWeather = (location) => {
 				}
 			};
 			const { data } = await axios.post('/call-api', payload);
-			console.log('data', data)
 			dispatch(fetchCurrentWeatherSuccess(data));
 		}
 		catch (err) {

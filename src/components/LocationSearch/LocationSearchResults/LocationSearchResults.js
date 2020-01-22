@@ -26,7 +26,7 @@ const LocationSearchResults = ({ show, loading, error, locations, selectLocation
 	let content = <Spinner />;
 
 	if (error) {
-		content = <ErrorPanel message={error} showHeader={false} />
+		content = <ErrorPanel message={error} showHeader={false} />;
 	}
 	else if (!loading) {
 		if (locations.length === 0) {
@@ -73,12 +73,7 @@ const LocationSearchResults = ({ show, loading, error, locations, selectLocation
 
 	return (
 		<section className="location-results">
-			{show &&
-				<>
-					{content}
-					
-				</>
-			}
+			{show && content}
 		</section>
 	);
 };

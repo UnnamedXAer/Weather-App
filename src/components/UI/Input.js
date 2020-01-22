@@ -10,7 +10,6 @@ const Input = styled.input`
 	color: var(--color-main);
 	outline: none;
 	width: ${props => props.width || 'auto'};
-	
 `;
 
 export default Input;

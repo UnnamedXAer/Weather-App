@@ -23,3 +23,7 @@
 	background-color: white;
 	border-radius: 50%;
 }
+
+.weather-today__tooltip::first-letter {
+	text-transform: uppercase;
+}

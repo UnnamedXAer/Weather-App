@@ -5,13 +5,17 @@ import './PageLocationHeader.css';
 const PageLocationHeader = ({ location, style }) => {
 	return (
 		<h1 className="page-location-header" style={{ ...style }}>
-			{location.city}{(location.country ? `, ${location.country}` : (location.countryCode ? `, ${location.countryCode}` : ""))}
-			</h1>
+			{location.city}
+			{(location.country 
+				? `, ${location.country}` 
+				: (location.countryCode ? `, ${location.countryCode}` : ""))}
+		</h1>
 	);
 };
 
 PageLocationHeader.propTypes = {
-	location: PropTypes.object
+	location: PropTypes.object,
+	style: PropTypes.object
 };
 
 export default PageLocationHeader;
