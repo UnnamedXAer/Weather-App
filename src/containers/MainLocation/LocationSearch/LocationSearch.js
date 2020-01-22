@@ -33,7 +33,10 @@ const LocationSearch = (props) => {
 		if (trimmedValue.length > 1) {
 			suggestionsCheckTimeoutRef.current = setTimeout(() => {
 				setShowResults(true);
-				// props.fetchLocationsByPrefix(trimmedValue, 0);
+				props.fetchLocationsByPrefix(trimmedValue, 0);
+				
+				// const url = "http://gd.geobytes.com/AutoCompleteCity?callback="+CallbackFunction +"&filter=" + CountryCodeComaSeparated + "&q=" + Prefix;
+
 			}, 700);
 		}
 	};
@@ -65,31 +68,32 @@ const LocationSearch = (props) => {
 
     return (
         <section className="location-search">
-			<div className="location-search__input-container">
-				<div>
+			<div className="location-search__container">
+				<div className="location-search__input-container">
 					<LocationInput 
 						inputRef={locationInputRef}
 						value={locationText}
 						valueChanged={locationTextChangeHandler}
 					/>
-				</div>
-				<div className="location-search__gps">
-					{props.geolocationLoading ? <Spinner /> :						
-						<Button 
-							data-tip="Use Your position"
-							onClick={getGeolocationHandler} 
-							disabled={props.geolocationDisabled}
-						>
-							<svg>
-								<use xlinkHref={`${gpsIcon}#gps_icon`} />	
-							</svg>
-						</Button>
-					}
+					<div className="location-search__gps">
+						{props.geolocationLoading ? <Spinner /> :						
+							<Button 
+								data-tip="Use Your position"
+								onClick={getGeolocationHandler} 
+								disabled={props.geolocationDisabled}
+							>
+								<svg>
+									<use xlinkHref={`${gpsIcon}#gps_icon`} />	
+								</svg>
+							</Button>
+						}
+					</div>
 				</div>
 			</div>
 			<LocationSearchResults 
 				show={showResults}
 				loading={props.searchLoading}
+				error={props.searchError}
 				locations={props.searchResults}
 				offsetInfo={props.searchMetadata}
 				selectLocation={selectLocationHandler}
@@ -105,7 +109,8 @@ LocationSearch.propTypes = {
 	searchMetadata: PropTypes.object,	
 	searchLoading: PropTypes.bool,	
 	searchResults: PropTypes.array,	
-
+	searchError: PropTypes.string,	
+	
 	fetchLocationsByPrefix: PropTypes.func,
 	fetchLocationByCoords: PropTypes.func,
 	setCurrentLocation: PropTypes.func,
@@ -119,6 +124,7 @@ const mapStateToProps = (state) => {
 		searchMetadata: state.location.searchMetadata,
 		searchLoading: state.location.searchLoading,
 		searchResults: state.location.searchResults,
+		searchError: state.location.searchError
 	};
 };
 

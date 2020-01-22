@@ -1,7 +1,10 @@
 .location-input {
+	width: 100%;
+	width: -webkit-fill-available;
     font-size: 1.8em;
 	font-family: inherit;
     outline: none;
     border: none;
-    padding: 10px 16px;
+	padding: 10px 16px;
+	background-color: inherit;
 }

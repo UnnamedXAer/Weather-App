@@ -6,16 +6,21 @@
 }
 
 .location-search__container {
-    display: block;
-    min-width: 400px;
+	margin-bottom: 16px;
+	background-color: var(--color-secondary);
+	padding: 0px 2em 5px 2em;
+	width: 100%;
+	
 }
 
 .location-search__input-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 2px solid var(--color-main);
-    margin-bottom: 16px;
+	margin: 0 auto;
+	border-bottom: 2px solid var(--color-main);
+	width: 80%;
+	min-width: 330px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .location-search__gps {

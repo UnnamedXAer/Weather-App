@@ -2,20 +2,9 @@ import React from 'react';
 import './WeatherTodayDetails.css';
 import { dateToLocalString } from '../../utils/time';
 import Spinner from '../UI/Spinner';
-import ErrorPanel from '../ErrorPanel/ErrorPanel';
 
-const WeatherTodayDetails = ({ weatherData, location, loading, error }) => {
-	const openWeatherMapUrl = `https://openweathermap.org/weathermap
-		?basemap=map
-		&cities=true
-		&layer=temperature
-		&lat=${location.latitude}
-		&lon=${location.longitude}
-		&zoom=7`;
+const WeatherTodayDetails = ({ weatherData, location, loading }) => {
 
-	if (error) {
-		return <ErrorPanel message={error} />;
-	}
 	return (
 		<div className="weather-today-details">
 			{loading ? <div className="weather-today-details__spinner"><Spinner /></div>
@@ -36,7 +25,7 @@ const WeatherTodayDetails = ({ weatherData, location, loading, error }) => {
 							</tr>
 							<tr>
 								<td className="weather-today-details__cell">Humidity</td>
-								<td className="weather-today-details__cell">{weatherData.humidity} %</td>
+								<td className="weather-today-details__cell">{weatherData.humidity}%</td>
 							</tr>
 							<tr>
 								<td className="weather-today-details__cell">Sunrise</td>
@@ -60,7 +49,13 @@ const WeatherTodayDetails = ({ weatherData, location, loading, error }) => {
 								<td colSpan="2" style={{ fontSize: '0.7em' }}>
 									<a
 										data-tip="Open map on OpenWeather.com"
-										href={openWeatherMapUrl}
+										href={`https://openweathermap.org/weathermap
+											?basemap=map
+											&cities=true
+											&layer=temperature
+											&lat=${location.latitude}
+											&lon=${location.longitude}
+											&zoom=7`}
 										target="_bank"
 									>
 										, or Show Map

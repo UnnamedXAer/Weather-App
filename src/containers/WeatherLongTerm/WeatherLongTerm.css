@@ -6,6 +6,12 @@
 	min-height: 300px;
 }
 
+.weather-long-term__missing-location {
+	padding: 10px 30px;
+	text-align: center;
+	background-color: var(--color-secondary);
+}
+
 .weather-long-term__container {
 	padding: 0 10px;
 	width: 100%;
@@ -19,6 +25,7 @@
 	overflow-x: auto;
 	white-space: nowrap;
 	-webkit-overflow-scrolling: touch;
+	text-align: center;
 }
 
 .weather-long-term__col {
@@ -43,6 +50,7 @@
 	min-width: 75px;
 	border: 1px solid var(--color-main);
 	font-size: 0.8em;
+	background-color: rgba(219, 219, 219, 0.8);
 }
 
 .weather-long-term__col-img p {
